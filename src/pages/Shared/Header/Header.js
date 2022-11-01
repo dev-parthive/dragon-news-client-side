@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Context/Authprovider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 const Header = () => {
+  const {user, logOut} = useContext(AuthContext)
+
+  const handleLogOut = () =>{
+    logOut()
+    .then( ()=>{
+
+    })
+    .catch( error => console.log(error.message))
+  }
+
+
     return (
         <Navbar className='mb-4' collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
@@ -28,10 +42,34 @@ const Header = () => {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets">More deets</Nav.Link>
+             
               <Nav.Link eventKey={2} href="#memes">
-                Dank memes
+                {user?.photoURL ? 
+                <Image style={{height: '44px'}} roundedCircle src={user.photoURL}></Image>  
+                : 
+                <FaUserAlt></FaUserAlt>
+              }
               </Nav.Link>
+
+              < >
+                {
+                  user?.uid ? 
+                  
+                 <>
+                 <span>{user?.displayName} </span>
+                 <Button variant="light" onClick={handleLogOut}>Logout</Button>
+                 
+                 </>
+                  
+                  :
+                  
+                   <>
+                 <Link to="/login" > <button>Login</button></Link>  <Link to="/register"> <button>Register</button></Link>
+                  </>
+                }
+                
+              
+              </>
             </Nav>
             <div className='d-lg-none'>
                 <LeftSideNav></LeftSideNav>
