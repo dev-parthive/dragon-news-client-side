@@ -18,9 +18,7 @@ const PrivateRoutes = ({children}) => {
 
 
     if(loading){
-        <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+        return  <Spinner animation="border" variant="primary" />
     }
 
     if(!user){

@@ -12,7 +12,7 @@ const Login = () => {
 const [error, setError] = useState(null)
 
     const navigate = useNavigate()
-    const {signIn} = useContext(AuthContext)
+    const {signIn, setLoading} = useContext(AuthContext)
     const location = useLocation()
 
     const from = location.state?.from?.pathname || '/' ;
@@ -42,6 +42,9 @@ const [error, setError] = useState(null)
         .catch( error=>{
             console.log(error)
             setError(error.message)
+        })
+        .finally(() =>{
+            setLoading(false);
         })
 
     }
