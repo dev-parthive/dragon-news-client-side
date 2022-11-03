@@ -10,7 +10,7 @@ const auth = getAuth(app);
 
 const Authprovider = ({children}) => {
 
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState({})
     const [laoding, setLoading] = useState(true) 
     const createUser = (email, password) =>{
     return    createUserWithEmailAndPassword(auth, email, password)
@@ -29,6 +29,7 @@ const Authprovider = ({children}) => {
 
 
     const updateUserProfile = (profile) =>{
+        setLoading(true)
         return updateProfile(auth.currentUser , profile)
     }
 
@@ -46,10 +47,10 @@ const Authprovider = ({children}) => {
 
         const unSubscribed = onAuthStateChanged(auth, (currentUser) =>{
             console.log('user inside state change', currentUser)
-          if( currentUser === null ||   currentUser.emailVerified){
-            setUser(currentUser)
-            
-          }
+        //   if( currentUser === null ||   currentUser.emailVerified){
+              
+        // }
+        setUser(currentUser)
             setLoading(false)
 
         });
@@ -59,7 +60,7 @@ const Authprovider = ({children}) => {
     }, [])
     
     const authInfo = {user, providerLogin, user, setUser, logOut, createUser, signIn , laoding, setLoading , 
-        updateUserProfile, verifyEmail, setLoading}
+        updateUserProfile, setLoading, verifyEmail}
     return (
         <AuthContext.Provider value={ authInfo }>
             {children}

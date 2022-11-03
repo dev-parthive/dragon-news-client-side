@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image'
 
 import {FaEye, FaRegBookmark, FaShareAlt, FaStar, } from 'react-icons/fa'
+import useTitle from '../../../hooks/useTitle';
 
 
 const NewsSummaryCard = ({news}) => {
     console.log(news)
     const {author, category_id, details, image_url, published_date, rating, thumbnail_url, title, total_view, _id, } = news 
+
     return (
         <Card className=" mb-5">
         <Card.Header className='d-flex  justify-content-between align-items-center'>

@@ -2,10 +2,12 @@ import React from 'react';
 import { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../../Context/Authprovider';
+import useTitle from '../../../hooks/useTitle';
 import NewsSummaryCard from '../../Shared/NewsSummaryCard/NewsSummaryCard';
 
 const Home = () => {
     const allNews = useLoaderData()
+    useTitle('Home')
     return (
         <div>
             <h2>Dragon News Home{allNews?.length}</h2>

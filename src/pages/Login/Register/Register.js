@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/Authprovider';
+import useTitle from '../../../hooks/useTitle';
 
 const Register = () => {
 
@@ -13,7 +14,7 @@ const Register = () => {
     const {createUser, updateUserProfile, verifyEmail} = useContext(AuthContext)
     const [accepted , setAccepted] = useState(false)
 
-
+    useTitle('Register')
     const handleAccepted = (event) =>{
         setAccepted(event.target.checked)
         console.log(accepted)
